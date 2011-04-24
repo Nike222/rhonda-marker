@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <item>
+       <widget class="QToolButton" name="projectButton">
+        <property name="text">
+         <string>Документ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="objectsButton">
+        <property name="text">
+         <string>Объекты</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="framesButton">
+        <property name="text">
+         <string>Кадры</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="saveButton">
+        <property name="text">
+         <string>Сохранить</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="StackedWidget" name="stacked">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="ProjectPage">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>9</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="RecentGroup">
+          <property name="title">
+           <string>Недавние документы</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QListView" name="listView">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="OpenRecentAs">
+               <property name="text">
+                <string>Открыть...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="OpenRecent">
+               <property name="text">
+                <string>Открыть</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="NewGroup">
+          <property name="title">
+           <string>Новый документ</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="NewFNameLabel">
+               <property name="text">
+                <string>Файл:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="FileChooseEdit" name="NewFNameEdit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="NewFNameButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Выбрать</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="NewFramesLabel">
+               <property name="text">
+                <string>Источник кадров:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="FileChooseEdit" name="NewFramesEdit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QPushButton" name="NewFramesButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Выбрать</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="NewLibLabel">
+               <property name="text">
+                <string>Библиотека:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QPushButton" name="NewLibButton">
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Выбрать</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="NewLibCombo">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <layout class="QFormLayout" name="formLayout">
+               <item row="0" column="0">
+                <widget class="QLabel" name="FPSLabel">
+                 <property name="text">
+                  <string>FPS:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="FPSSpin"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="FrameSpeedLabel">
+                 <property name="text">
+                  <string>Скорость листания:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="FrameSpeedSpin"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="FrameBiasLabel">
+                 <property name="text">
+                  <string>Смещение листания:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QSpinBox" name="FrameBiasSpin"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="NewCommentBox">
+             <property name="title">
+              <string>Комментарий</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QPlainTextEdit" name="NewCommentText"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="NewClearButton">
+               <property name="text">
+                <string>Очистить</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="NewCreateButton">
+               <property name="text">
+                <string>Создать</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="LibraryPage">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="ObjLibGroup">
+          <property name="title">
+           <string>Библиотека</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="LibObjectsList" name="ObjLibList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ObjAddButton">
+            <property name="minimumSize">
+             <size>
+              <width>25</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ObjRemoveButton">
+            <property name="minimumSize">
+             <size>
+              <width>25</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>&lt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="ObjUsedList_2">
+          <property name="title">
+           <string>Использумые объекты</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="LibListView" name="ObjUsedList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="ObjPropsBox">
+          <property name="title">
+           <string>Используемые свойства</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QListView" name="ObjPropsList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="FramesPage">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="FramesGroup">
+          <property name="title">
+           <string>Кадры</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QListView" name="FramesList"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="MarkPage">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>798</width>
+             <height>415</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>FileChooseEdit</class>
+   <extends>QLineEdit</extends>
+   <header>ui/filechooseedit.hpp</header>
+   <slots>
+    <slot>choose()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>StackedWidget</class>
+   <extends>QStackedWidget</extends>
+   <header>ui/stackedwidget.hpp</header>
+   <container>1</container>
+   <slots>
+    <slot>toProject()</slot>
+    <slot>toObjects()</slot>
+    <slot>toFrames()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>LibObjectsList</class>
+   <extends>QTreeView</extends>
+   <header>ui/libobjectslist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LibListView</class>
+   <extends>QListView</extends>
+   <header>ui/liblistview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>NewFNameButton</sender>
+   <signal>clicked()</signal>
+   <receiver>NewFNameEdit</receiver>
+   <slot>choose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>738</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>69</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NewFramesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>NewFramesEdit</receiver>
+   <slot>choose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>738</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projectButton</sender>
+   <signal>clicked()</signal>
+   <receiver>stacked</receiver>
+   <slot>toProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>objectsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>stacked</receiver>
+   <slot>toObjects()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>framesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>stacked</receiver>
+   <slot>toFrames()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_actionToCreatePage_triggered()</slot>
+ </slots>
+</ui>

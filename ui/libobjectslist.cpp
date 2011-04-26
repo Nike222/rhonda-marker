@@ -3,8 +3,8 @@
 LibObjectsList::LibObjectsList(QWidget *parent) :
     QTreeView(parent)
 {
-    lib.setSchema("/home/od1n/devel/qt/mproto/lib.xsd");
-    lib.load("/home/od1n/devel/qt/mproto/lib.xml");
+    lib.setSchema("/home/od1n/devel/qt/sources/marker/SampleFiles/lib.xsd");
+    lib.load("/home/od1n/devel/qt/sources/marker/SampleFiles/lib.xml");
     model = new xmlModel (lib);
     this->setModel(model);
 }

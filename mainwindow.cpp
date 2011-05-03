@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->NewFramesEdit->setCaption(QString::fromLocal8Bit("Открыть источник кадров"));
 	ui->NewFramesEdit->setMode(FileChooseEdit::MOpen);
 
+        loadRecent();
 	connectSignals();
 	createModels();
 	document.setComment(ui->NewCommentText);
@@ -69,13 +70,16 @@ void MainWindow::connectSignals()
 
 	QObject::connect(ui->ObjAddButton, SIGNAL(clicked()), ui->ObjUsedList, SLOT(on_right_clicked()));
 	QObject::connect(ui->ObjRemoveButton, SIGNAL(clicked()), ui->ObjUsedList, SLOT(on_left_clicked()));
+
+        //for recent docs
+        QObject::connect(&document, SIGNAL(created(QString)), recentdocs, SLOT(addFilename(QString)));
+        QObject::connect(recentdocs, SIGNAL(dataChanged()), ui->listView, SLOT(reset()));
 }
 
 
 void MainWindow::writeSettings()
 {
 	QSettings settings;
-
 	settings.beginGroup("MainWindow");
 	settings.setValue("size", size());
 	settings.setValue("pos", pos());
@@ -96,5 +100,6 @@ void MainWindow::loadSettings()
 
 void MainWindow::loadRecent()
 {
-
+        recentdocs = new RecentDocs(this);
+        ui->listView->setModel(recentdocs);
 }

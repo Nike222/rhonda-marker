@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     libs/TreeModel/xmlItem.cpp \
     libs/ListModel/listModel.cpp \
     libs/xmllib/xmllibrary.cpp \
-    libs/xmllib/xmllibrarygroups.cpp
+    libs/xmllib/xmllibrarygroups.cpp \
+    document/recentdocs.cpp
 
 HEADERS  += mainwindow.hpp \
     document/document.hpp \
@@ -43,6 +44,7 @@ HEADERS  += mainwindow.hpp \
     libs/TreeModel/xmlItem.h \
     libs/ListModel/listModel.h \
     libs/xmllib/xmllibrary.hpp \
-    libs/xmllib/xmllibrarygroups.hpp
+    libs/xmllib/xmllibrarygroups.hpp \
+    document/recentdocs.h
 
 FORMS    += mainwindow.ui

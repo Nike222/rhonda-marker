@@ -27,7 +27,7 @@ public:
 signals:
 	void locked(bool);
 	void changed();
-	void created();
+        void created(QString);
 	void FileNameChanged(QString);
 	void LibraryChanged(QString);
 	void FrameSourceChanged(QString);

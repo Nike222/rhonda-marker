@@ -81,7 +81,7 @@
     <item>
      <widget class="StackedWidget" name="stacked">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="ProjectPage">
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -546,8 +546,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>798</width>
-             <height>415</height>
+             <width>96</width>
+             <height>26</height>
             </rect>
            </property>
           </widget>

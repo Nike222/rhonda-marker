@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "document/document.hpp"
+#include "document/recentdocs.h"
 
 namespace Ui {
     class MainWindow;
@@ -19,6 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
 	Document document;
+        RecentDocs *recentdocs;
 
 	void connectSignals();
 	void createModels();

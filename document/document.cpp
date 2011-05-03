@@ -90,7 +90,7 @@ void Document::create()
 	/* mostly full */
 	emitAll();
 	emit locked(true);
-	emit created();
+        emit created(m_fileName);
 }
 
 void Document::load(QString filename)
@@ -102,7 +102,7 @@ void Document::load(QString filename)
 
 	emitAll();
 	emit locked(true);
-	emit created();
+        emit created(m_fileName);
 }
 
 void Document::save(QString filename)

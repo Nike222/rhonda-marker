@@ -6,7 +6,7 @@
 FileChooseEdit::FileChooseEdit(QWidget *parent)
 	: QLineEdit(parent)
 	, m_mode(MSave)
-
+        , m_afterFocus(false)
 {
 }
 
@@ -43,4 +43,13 @@ void FileChooseEdit::choose()
 void FileChooseEdit::setMode(Mode mode)
 {
 	m_mode = mode;
+}
+
+void FileChooseEdit::focusInEvent (QFocusEvent *)
+{
+    if (!m_afterFocus){
+        choose();
+        m_afterFocus = true;
+    }
+    else m_afterFocus = false;
 }

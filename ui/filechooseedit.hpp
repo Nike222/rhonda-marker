@@ -22,10 +22,14 @@ signals:
 public slots:
 	void choose();
 
+protected:
+        void focusInEvent (QFocusEvent *);
+
 private:
 	QString m_mask;
 	QString m_caption;
 	enum Mode m_mode;
+        bool m_afterFocus;
 
 };
 

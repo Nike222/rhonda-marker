@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	ui->NewFNameEdit->setCaption(QString::fromLocal8Bit("Сохранить документ"));
 	ui->NewFNameEdit->setFileMask(QString::fromLocal8Bit("Файл разметки (*.xml)"));
+        ui->NewLibCombo->setFileMask(QString::fromLocal8Bit("Файл разметки (*.xml)"));
 
 	ui->NewFramesEdit->setCaption(QString::fromLocal8Bit("Открыть источник кадров"));
 	ui->NewFramesEdit->setMode(FileChooseEdit::MOpen);
@@ -44,10 +45,11 @@ void MainWindow::connectSignals()
 	QObject::connect(ui->NewFramesEdit, SIGNAL(textChanged(QString)), &document, SLOT(setFrameSource(QString)));
 	QObject::connect(&document, SIGNAL(FrameSourceChanged(QString)), ui->NewFramesEdit, SLOT(setText(QString)));
 
-	QObject::connect(ui->NewLibCombo, SIGNAL(editTextChanged(QString)), &document, SLOT(setLibrary(QString)));
+        QObject::connect(ui->NewLibCombo, SIGNAL(editTextChanged(QString)), &document, SLOT(setLibrary(QString)));
 	QObject::connect(&document, SIGNAL(LibraryChanged(QString)), ui->NewLibCombo, SLOT(setEditText(QString)));
 
 	QObject::connect(ui->NewCreateButton, SIGNAL(clicked()), &document, SLOT(create()));
+        QObject::connect(&document, SIGNAL(ParametersChecked(bool)), ui->NewCreateButton, SLOT(setEnabled(bool)));
 
 	QObject::connect(&document, SIGNAL(locked(bool)), ui->NewLibButton, SLOT(setDisabled(bool)));
 	QObject::connect(&document, SIGNAL(locked(bool)), ui->NewLibCombo, SLOT(setDisabled(bool)));

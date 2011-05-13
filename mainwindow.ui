@@ -192,6 +192,9 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="inputMethodHints">
+                <set>Qt::ImhNone</set>
+               </property>
               </widget>
              </item>
              <item row="0" column="2">
@@ -227,6 +230,9 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="inputMethodHints">
+                <set>Qt::ImhNone</set>
                </property>
               </widget>
              </item>
@@ -270,9 +276,15 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QComboBox" name="NewLibCombo">
+              <widget class="LibChooseEdit" name="NewLibCombo">
+               <property name="inputMethodHints">
+                <set>Qt::ImhNone</set>
+               </property>
                <property name="editable">
-                <bool>true</bool>
+                <bool>false</bool>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                </property>
               </widget>
              </item>
@@ -368,6 +380,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="NewCreateButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Создать</string>
                </property>
@@ -592,6 +607,14 @@
    <extends>QListView</extends>
    <header>ui/liblistview.h</header>
   </customwidget>
+  <customwidget>
+   <class>LibChooseEdit</class>
+   <extends>QComboBox</extends>
+   <header>ui/libchooseedit.hpp</header>
+   <slots>
+    <slot>choose()</slot>
+   </slots>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
@@ -672,6 +695,22 @@
     <hint type="destinationlabel">
      <x>399</x>
      <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NewLibButton</sender>
+   <signal>clicked()</signal>
+   <receiver>NewLibCombo</receiver>
+   <slot>choose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>710</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>680</x>
+     <y>135</y>
     </hint>
    </hints>
   </connection>

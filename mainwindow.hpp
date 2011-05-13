@@ -28,8 +28,7 @@ private:
 	void loadSettings();
 	void loadRecent();
 
-private slots:
-
+public slots:
 
 private slots:
 

@@ -7,11 +7,12 @@ Document::Document(QObject *parent)
 	, m_fps(24)
 	, m_frameSpeed(1)
 	, m_frameBias(0)
-	, m_locked(false)
+        , m_locked(false)
 	, m_frames(NULL)
 	, m_mark(NULL)
 {
 	emitAll();
+        qDebug() << "Initialized";
 }
 
 Document::~Document()
@@ -31,6 +32,7 @@ void Document::setFileName(QString file_name)
 		m_fileName = file_name;
 		emit FileNameChanged(m_fileName);
 		emit changed();
+                emit checkParameters();
 	}
 }
 
@@ -39,6 +41,8 @@ void Document::setLibrary(QString library)
 	if (!m_locked && (library != m_library)) {
 		m_library = library;
 		emit LibraryChanged(m_library);
+                emit changed();
+                emit checkParameters();
 	}
 }
 
@@ -48,6 +52,7 @@ void Document::setFrameSource(QString frame_source)
 		m_frameSource = frame_source;
 		emit FrameSourceChanged(m_frameSource);
 		emit changed();
+                emit checkParameters();
 	}
 }
 
@@ -123,4 +128,18 @@ void Document::emitAll()
 	emit FPSChanged(m_fps);
 	emit FrameSpeedChanged(m_frameSpeed);
 	emit FrameBiasChanged(m_frameBias);
+}
+
+void Document::checkParameters()
+{
+    if (!m_fileName.isEmpty()
+        && !m_library.isEmpty()
+        && !m_frameSource.isEmpty()){
+        emit ParametersChecked(true);
+        qDebug() << "NewCreateButton set to enable";
+    }
+    else {
+        emit ParametersChecked(false);
+        qDebug() << "NewCreateButton set to enable";
+    }
 }

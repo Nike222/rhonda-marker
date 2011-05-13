@@ -34,6 +34,7 @@ signals:
 	void FPSChanged(int);
 	void FrameSpeedChanged(int);
 	void FrameBiasChanged(int);
+        void ParametersChecked(bool);
 
 
 public slots:
@@ -62,6 +63,7 @@ private:
 	FramesMark	*m_mark;
 
 	void emitAll();
+        void checkParameters();
 };
 
 #endif // DOCUMENT_HPP

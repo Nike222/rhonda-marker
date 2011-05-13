@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     libs/ListModel/listModel.cpp \
     libs/xmllib/xmllibrary.cpp \
     libs/xmllib/xmllibrarygroups.cpp \
-    document/recentdocs.cpp
+    document/recentdocs.cpp \
+    ui/libchooseedit.cpp
 
 HEADERS  += mainwindow.hpp \
     document/document.hpp \
@@ -45,6 +46,7 @@ HEADERS  += mainwindow.hpp \
     libs/ListModel/listModel.h \
     libs/xmllib/xmllibrary.hpp \
     libs/xmllib/xmllibrarygroups.hpp \
-    document/recentdocs.h
+    document/recentdocs.h \
+    ui/libchooseedit.hpp
 
 FORMS    += mainwindow.ui

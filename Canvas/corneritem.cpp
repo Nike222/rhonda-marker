@@ -3,7 +3,7 @@
 #include <math.h>
 #include <QDebug>
 
-CornerItem::CornerItem(Qt::Corner corner, AbstractContent * parent)
+CornerItem::CornerItem(uint corner, AbstractContent * parent)
 	: QGraphicsItem(parent)
 	, m_content(parent)
 	, m_corner(corner)
@@ -14,7 +14,7 @@ CornerItem::CornerItem(Qt::Corner corner, AbstractContent * parent)
 	setAcceptsHoverEvents(true);
 }
 
-void CornerItem::relayout(const QRect & rect)
+void CornerItem::relayout(const QRect & rect, uint shape)
 {
 	// change side, if needed
 	int side = 1 + (int)sqrt((float)qMin(rect.width(), rect.height()));
@@ -23,13 +23,18 @@ void CornerItem::relayout(const QRect & rect)
 		m_side = side;
 	}
 
-	// place at the right corner
-	switch (m_corner) {
-		case Qt::TopLeftCorner: setPos(rect.topLeft() + QPoint(m_side, m_side)); break;
-		case Qt::TopRightCorner: setPos(rect.topRight() + QPoint(-m_side + 1, m_side)); break;
-		case Qt::BottomLeftCorner: setPos(rect.bottomLeft() + QPoint(m_side, -m_side + 1)); break;
-		case Qt::BottomRightCorner: setPos(rect.bottomRight() + QPoint(-m_side + 1, -m_side + 1)); break;
-	}
+        switch (m_corner) {
+                case TopLeft:       setPos(rect.topLeft() + QPoint(m_side, m_side)); break;
+                case TopRight:      setPos(rect.topRight() + QPoint(-m_side + 1, m_side)); break;
+                case BottomLeft:    setPos(rect.bottomLeft() + QPoint(m_side, -m_side + 1)); break;
+                case BottomRight:   setPos(rect.bottomRight() + QPoint(-m_side + 1, -m_side + 1)); break;
+
+                case Left:          setPos(QPoint(rect.topLeft().x(), 0) + QPoint(m_side, 0)); break;
+                case Right:         setPos(QPoint(rect.topRight().x()+1, 0) + QPoint(-m_side, 0)); break;
+                case Top:           setPos(QPoint(0, rect.topLeft().y()) + QPoint(0, m_side)); break;
+                case Bottom:        setPos(QPoint(0, rect.bottomLeft().y()) + QPoint(0, -m_side)); break;
+        }
+
 }
 
 QRectF CornerItem::boundingRect() const
@@ -68,6 +73,7 @@ void CornerItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 	// intial parameters
 	QRectF cRect = m_content->boundingRect();
 	m_startRatio = cRect.width() / cRect.height();
+        m_startSize = QPointF(cRect.width(), cRect.height());
 
 	update();
 }
@@ -94,28 +100,104 @@ void CornerItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 	if ((op & (Rotate | Scale)) == Off)
 		return;
 
+        QPointF v = pos() + event->pos();
+#if 0
 	// vector relative to the centre
-	QPointF v = pos() + event->pos();
+        switch ( m_corner ) {
+            case Left:
+            case Right:
+            {
+                v.setX(v.x() + event->pos().x());
+                v.setY(0);
+                break;
+            }
+
+            case Top:
+            case Bottom:
+            {
+                v.setY(v.y() + event->pos().y());
+                v.setX(0);
+                break;
+            }
+
+            case TopLeft:
+            case BottomLeft:
+            case BottomRight:
+            case TopRight:
+            default:
+            {
+                v.setY(v.y() + event->pos().y());
+                v.setX(v.x() + event->pos().x());
+                break;
+            }
+        }
+#endif
+        qDebug() << pos() << " " << event->pos() << " " << v;
 	if (v.isNull())
 		return;
 
 	// do scaling
 	m_content->delayedDirty();
 	if (op & Scale) {
+                int W, H;
 		if (op & FixScale) {
-			const double r = m_startRatio;
-			const double D = sqrt(v.x()*v.x() + v.y()*v.y());
-			const double K = sqrt(1 + 1/(r * r));
-			int W = qMax((int)((2*D)/(K)), 50);
-			int H = qMax((int)((2*D)/(r*K)), 40);
-			m_content->resizeContents(QRect(-W / 2, -H / 2, W, H));
+                        const double r = m_startRatio;
+                        const double D = sqrt(v.x()*v.x() + v.y()*v.y()); // vector length
+                        double K = 1;
+                        switch (m_corner) {
+                        case TopLeft:
+                        case TopRight:
+                        case BottomLeft:
+                        case BottomRight:
+                        {
+                            K = sqrt(1 + 1/(r * r));
+                            break;
+                        }
+                        case Left:
+                        case Right:
+                        case Top:
+                        case Bottom:
+                        default:
+                        {
+                            K = 1;
+                            break;
+                        }
+                        }
+
+                        // const double K = sqrt(1 + 1/(r * r));
+
+                        W = qMax((int)((2*D)/(K)), 40);
+                        H = qMax((int)((2*D)/(r*K)), 40);
+                        //m_content->resizeContents(QRect(-W / 2, -H / 2, W, H));
 		} else {
-			int W = qMax(2 * fabs(v.x()), 50.0); //(m_contentRect.width() * v.x()) / oldPos.x();
-			int H = qMax(2 * fabs(v.y()), 40.0); //(m_contentRect.height() * v.y()) / oldPos.y();
+                    double mH, mW;
+                    switch (m_corner) {
+                    case Left:
+                    case Right:
+                        mW = 40.0;
+                        mH = qMax(40.0, m_startSize.y());
+                        break;
+                    case Top:
+                    case Bottom:
+                        mW = qMax(40.0, m_startSize.x());
+                        mH = 40.0;
+                        break;
+                    default:
+                    {
+                        mW = qMax(40.0, m_startSize.x());
+                        mH = qMax(40.0, m_startSize.y());
+                        break;
+                    }
+
+                    }
+
+                    W = qMax(2 * fabs(v.x()), mW); //(m_contentRect.width() * v.x()) / oldPos.x();
+                        H = qMax(2 * fabs(v.y()), mH); //(m_contentRect.height() * v.y()) / oldPos.y();
 			//if (W != (int)cRect.width() || H != (int)cRect.height())
-				m_content->resizeContents(QRect(-W / 2, -H / 2, W, H));
+                       //         m_content->resizeContents(QRect(-W / 2, -H / 2, W, H));
 		}
-	}
+                m_content->resizeContents(QRect(-W / 2, -H / 2, W, H));
+        }
 
 	// do rotation
 	if (op & Rotate) {

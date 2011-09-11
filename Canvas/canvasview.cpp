@@ -11,6 +11,7 @@
 
 CanvasView::CanvasView(QWidget *parent) :
     QGraphicsView(parent)
+    , items_counter(0)
 {
 	scene = 0;
 }
@@ -94,6 +95,10 @@ void CanvasView::createRect()
 
 	RectangleContent *rect = new RectangleContent(scene);
 	scene->addItem(static_cast<QGraphicsItem *>(rect));
+        rect->setId(++items_counter);
+
+        QPointF lpos(mapToScene(m_menuPos));
+        rect->setPos(lpos.x(), lpos.y());
 }
 
 void CanvasView::createEllipse()
@@ -102,6 +107,10 @@ void CanvasView::createEllipse()
 
 	EllipseContent *item = new EllipseContent(scene);
 	scene->addItem(static_cast<QGraphicsItem *>(item));
+        item->setId(++items_counter);
+
+        QPointF lpos(mapToScene(m_menuPos));
+        item->setPos(lpos.x(), lpos.y());
 }
 
 void CanvasView::contextMenuEvent(QContextMenuEvent *event)
@@ -110,6 +119,8 @@ void CanvasView::contextMenuEvent(QContextMenuEvent *event)
 
 	QAction *act;
 
+        m_menuPos = QPoint(event->x(), event->y());
+
 	m_itemsList = scene->items(mapToScene(event->pos()));
 	qDebug() << "m_itemsList.length: " << m_itemsList.length();
 
@@ -117,8 +128,10 @@ void CanvasView::contextMenuEvent(QContextMenuEvent *event)
 		menu.addAction("Select Item:");
 		foreach (QGraphicsItem *item, m_itemsList) {
 			AbstractContent *i = dynamic_cast<AbstractContent *>(item);
-			if (i)
+                        if (i) {
 				act = menu.addAction(i->contentName());
+                                connect(act, SIGNAL(triggered()), i, SLOT(bringToFront()));
+                        }
 		}
 	} else {
 		menu.addAction("No items");

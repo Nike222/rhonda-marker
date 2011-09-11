@@ -8,6 +8,14 @@
 EllipseContent::EllipseContent(QGraphicsScene *scene, QGraphicsItem *parent, bool noRescale)
 	: AbstractContent(scene, parent, noRescale)
 {
+    setShape(AbstractContent::Ellipse);
+
+    createCorner(Top, noRescale);
+    createCorner(Right, noRescale);
+    createCorner(Bottom, noRescale);
+    createCorner(Left, noRescale);
+
+    layoutChildren();
 }
 
 EllipseContent::~EllipseContent()
@@ -22,9 +30,9 @@ QPainterPath EllipseContent::shape() const
 	return path;
 }
 
-QString EllipseContent::contentName() const
+QString EllipseContent::contentName()
 {
-	return QString("Ellipse");
+    return QString("Ellipse ") + QString::number(itemId());
 }
 
 void EllipseContent::drawContent(QPainter *painter, const QRect &targetRect, const QStyleOptionGraphicsItem *option)

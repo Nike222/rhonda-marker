@@ -7,6 +7,16 @@
 RectangleContent::RectangleContent(QGraphicsScene *scene, QGraphicsItem *parent, bool noRescale)
 	: AbstractContent(scene, parent, noRescale)
 {
+    setShape(AbstractContent::Rectangle);
+
+    createCorner(TopLeft, noRescale);
+    createCorner(TopRight, noRescale);
+    createCorner(BottomLeft, noRescale);
+    createCorner(BottomRight, noRescale);
+
+    createCorner(Top, noRescale);
+
+    layoutChildren();
 }
 
 RectangleContent::~RectangleContent()
@@ -21,9 +31,9 @@ QPainterPath RectangleContent::shape() const
 	return path;
 }
 
-QString RectangleContent::contentName() const
+QString RectangleContent::contentName()
 {
-	return QString("Rectangle");
+    return QString("Rectangle ") + QString::number(itemId());
 }
 
 void RectangleContent::drawContent(QPainter *painter, const QRect &targetRect, const QStyleOptionGraphicsItem *option)

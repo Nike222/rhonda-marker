@@ -14,7 +14,7 @@ public:
 
 	QPainterPath shape() const;
 
-	QString contentName() const;
+        QString contentName();
 	void drawContent(QPainter *painter, const QRect &targetRect, const QStyleOptionGraphicsItem *option);
 
 signals:

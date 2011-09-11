@@ -6,13 +6,24 @@
 
 class AbstractContent;
 
+enum Corner {
+    TopLeft = 0,
+    Top,
+    TopRight,
+    Right,
+    BottomRight,
+    Bottom,
+    BottomLeft,
+    Left
+};
+
 class CornerItem : public QGraphicsItem
 {
 public:
-	CornerItem(Qt::Corner corner, AbstractContent *parent);
+        CornerItem(uint corner, AbstractContent *parent);
 	~CornerItem() {}
 
-	void relayout(const QRect & rect);
+        void relayout(const QRect & rect, uint shape);
 
 	QRectF boundingRect() const;
 //	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
@@ -32,11 +43,12 @@ private:
 	};
 
 	AbstractContent *m_content;
-	Qt::Corner m_corner;
+        uint m_corner;
 	int m_opMask;
 	int m_side;
 	int m_operation;
 	double m_startRatio;
+        QPointF m_startSize;
 };
 
 #endif // CORNERITEM_HPP

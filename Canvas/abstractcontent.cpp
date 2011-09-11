@@ -3,13 +3,15 @@
 #include <QDebug>
 #include <QGraphicsScene>
 
-AbstractContent::AbstractContent(QGraphicsScene *scene, QGraphicsItem *parent, bool noRescale)
+AbstractContent::AbstractContent(QGraphicsScene *scene, QGraphicsItem *parent, bool noRescale, uint item_id)
 	: SceneSelection(parent)
 	, m_rotationAngle(0)
 	, m_controlsVisible(false)
 	, m_dirtyTransforming(false)
 	, m_transformRefreshTimer(0)
 	, m_rect(QRectF(-50, -50, 100, 100))
+        , m_item_id(item_id)
+        , m_shape_type(Rectangle)
 {
 	setAcceptHoverEvents(true);
 	setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -18,12 +20,14 @@ AbstractContent::AbstractContent(QGraphicsScene *scene, QGraphicsItem *parent, b
 	setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 	setAcceptedMouseButtons(Qt::LeftButton);
 
+        /*
 	createCorner(Qt::TopLeftCorner, noRescale);
 	createCorner(Qt::TopRightCorner, noRescale);
 	createCorner(Qt::BottomLeftCorner, noRescale);
 	createCorner(Qt::BottomRightCorner, noRescale);
+        */
 
-	layoutChildren();
+        //layoutChildren();
 }
 
 AbstractContent::~AbstractContent()
@@ -60,12 +64,22 @@ void AbstractContent::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 void AbstractContent::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
 	setControlsVisible(true);
+        bringToFront();
 }
 
 void AbstractContent::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
 	setControlsVisible(false);
+        bringToBack();
 }
+
+/*
+QString& AbstractContent::fullContentName()
+{
+    QString res(contentName() + " " + QString::number(m_item_id));
+    return res;
+}
+*/
 
 QVariant AbstractContent::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
@@ -82,7 +96,7 @@ QVariant AbstractContent::itemChange(QGraphicsItem::GraphicsItemChange change, c
 	return value;
 }
 
-void AbstractContent::createCorner(Qt::Corner corner, bool noRescale)
+void AbstractContent::createCorner(uint corner, bool noRescale)
 {
 	CornerItem * c = new CornerItem(corner, this);
 	c->setVisible(m_controlsVisible);
@@ -104,7 +118,12 @@ void AbstractContent::layoutChildren()
 {
 	// layout corners
 	foreach (CornerItem *corner, m_cornerItems)
-		corner->relayout(m_rect.toRect());
+                corner->relayout(m_rect.toRect(), m_shape_type);
+}
+
+void AbstractContent::bringToFront()
+{
+        setZValue(10);
 }
 
 void AbstractContent::resizeContents(const QRect & rect, bool keepRatio)
@@ -174,4 +193,10 @@ void AbstractContent::keyPressEvent(QKeyEvent *event)
         moveBy(0, 1);
         break;
     }
+}
+
+void AbstractContent::setPos(uint x, uint y)
+{
+    SceneSelection::setPos( x + (m_rect.width() / 2),
+                            y + (m_rect.height() / 2));
 }

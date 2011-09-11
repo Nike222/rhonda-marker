@@ -6,6 +6,7 @@
 #include <QRect>
 #include <QPixmap>
 #include <QContextMenuEvent>
+#include <QPoint>
 
 #include "canvasscene.hpp"
 
@@ -44,8 +45,11 @@ private:
 
 	QList<QGraphicsItem *> m_itemsList;
 
+        QPoint m_menuPos;
+        uint items_counter;
+
 private slots:
-	void createDot();
+        void createDot();
 	void createRect();
 	void createEllipse();
 

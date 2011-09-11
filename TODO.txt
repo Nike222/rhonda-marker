@@ -1,0 +1,19 @@
+todo:
+- создание объекта в месте клика
+- перемещение, ресайз, вращение с клавиатуры
+- сцена (объекты) toXml, fromXml
+- emit coordinates/size
+- фокус объекта
+- minimal size (too big for now)
+? tabulate-navigation
+
+- настройки цвета/alpha
+	- уголки(standby, mouseover, active), size
+	- рамки (standby, mouseover, focus), width
+	- заливки(фокус, mouseover)
+	
+- иконки свойств
+	- положение
+	- отображение (множество иконок?)
+	? hotkeys
+	- emit state-change

@@ -1,0 +1,134 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="marking">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="settings" type="SettingsList" />
+				<xsd:element name="frames" type="FramesMarkup" />
+				<xsd:element name="groups" type="FrameGroups" minOccurs="0" />
+			<!--	<xsd:element name="embedded_objects" type="EmbedObjects"
+					minOccurs="0" maxOccurs="1" /> -->
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="SettingsList">
+		<xsd:sequence>
+			<xsd:element name="base_path" type="xsd:string" />
+			<xsd:element name="frame_storage" type="xsd:string" />
+			<xsd:element name="library" type="xsd:string" />
+			<xsd:element name="frame_speed" type="xsd:positiveInteger" default="1" />
+			<xsd:element name="fps" type="xsd:positiveInteger" default="1" />
+			<xsd:element name="comment" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FramesMarkup">
+		<xsd:sequence>
+			<xsd:element name="frame" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="grouping" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="group" type="xsd:unsignedInt" minOccurs="0" maxOccurs="unbounded" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="object" type="Object" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+					<xsd:attribute name="number" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="completed" type="xsd:boolean" use="optional" default="false" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FrameGroups">
+		<xsd:sequence>
+			<xsd:element name="group" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="object" type="Object" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+					<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="each_frame" type="xsd:boolean" use="optional" default="false" />
+					<xsd:attribute name="completed" type="xsd:boolean" use="optional" default="false" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="Object">
+		<xsd:sequence>
+			<xsd:element name="rect" type="Rect" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="oval" type="Oval" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="point" type="Point" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="bool" type="Bool" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="int" type="Int" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="user_enum" type="UserEnum" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Rect">
+		<xsd:sequence>
+			<xsd:element name="topleft" type="basePoint" />
+			<xsd:element name="width" type="xsd:unsignedInt" />
+			<xsd:element name="height" type="xsd:unsignedInt" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Oval">
+		<xsd:sequence>
+			<xsd:element name="center" type="basePoint" />
+			<xsd:element name="radius_h" type="xsd:unsignedInt" />
+			<xsd:element name="radius_v" type="xsd:unsignedInt" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="basePoint">
+		<xsd:sequence>
+			<xsd:element name="x" type="xsd:integer" />
+			<xsd:element name="y" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Point">
+		<xsd:complexContent>
+			<xsd:extension base="basePoint">
+				<xsd:attribute name="name" type="xsd:string" use="required" />
+				<xsd:attribute name="object_group" type="xsd:unsignedInt" use="optional" default="0" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Bool">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:boolean">
+				<xsd:attribute name="name" type="xsd:string" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Int">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:integer">
+				<xsd:attribute name="name" type="xsd:string" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="UserEnum">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="xsd:unsignedInt" use="required" />
+				<xsd:attribute name="name" type="xsd:string" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+</xsd:schema>

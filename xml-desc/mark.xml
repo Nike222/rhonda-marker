@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Разметка -->
+<marking> <!-- Нужен более понятный тег -->
+	<settings>
+		<!-- Базовый путь к ресурсным айлам проекта:
+			файл библиотеки и источник кадров -->
+		<base_path>/some/path/</base_path>
+
+		<!-- Пути к ресурсным файлам.
+			Если начинается с / или буквы диска (C:), то путь считается абсолютным.
+				В противном случае, он добавляется к base_path
+			Если путь к видео-файлу кончается /, то источником кадров являются все
+				изображения в этом каталоге -->
+		<frame_storage>/absolute/path/to/file.avi</frame_storage>
+		<library>relative/path/to/lib.xml</library>
+
+		<!-- Указывает некоторое число n. Для разметки будет предоставлен только
+			каждый n-й кадр -->
+		<frame_speed>1</frame_speed>
+
+		<fps>25</fps> <!-- скорость обработки распознавателем -->
+		<!-- Еще установки проекта -->
+	</settings>
+
+	<frames>
+		<!-- Размеченный пустой кадр -->
+		<frame number="1" completed="true"></frame>
+
+		<!-- Показывать незаконченные -->
+		<!-- Размеченный кадр с объектами -->
+		<frame number="2" completed="true">
+			<object id="0">
+				<rect>
+					<topleft>
+						<x>14</x>
+						<y>67</y>
+					</topleft>
+					<width>230</width>
+					<height>170</height>
+				</rect>
+				<user_enum type="0">Front Side</user_enum>
+			</object>
+		</frame>
+
+		<!-- Есть проблема с нечеткой разметкой - когда известно, что действие/появление
+			объекта происходит на одном из последовательности кадров, но неизвестно
+			на каком именно.
+
+			Как вариант (mark_v1): группировать кадры добавлением тегов с
+			номером группы, а в	отдельной секции файла описывать группы с
+			множеством объектов в них.
+			Проблему с пересекающимися группами можно решать так:
+			<frames>
+				<frame id="86" complete="true">
+					<grouping>
+						<group>0</group>
+						<group>4</group>
+						...
+					</grouping>
+					...
+				</frame>
+				...
+			</frames>
+
+			<groups>
+				<group id="0" each_frame="false">
+					<object id="8">
+						...
+					</object>
+					...
+				</group>
+				...
+			</groups>
+
+
+			Другой вариант (mark_v2): Добавлять к каждому объекту на кадре
+				аттрибут номера группы, к которой он принадлежит.
+				Объекты без группы будут иметь object_group="0".
+				Объекты с одинаковыми номерами групп, отличными от 0, принадлежат
+				одной группе элементов.
+			<frames>
+				<frame id="3" complete="true">
+					<object id="9">
+						...
+					</object>
+					<object id="6" object_group="1">
+						...
+					</object>
+				</frame>
+				<frame id="4" complete="true">
+					<object id="6" object_group="1">
+						...
+					</object>
+				</frame>
+			</frames>
+			Минус - большая избыточность данных.
+		-->
+	</frames>
+
+	<!-- Как хранить объекты?
+		Вариант с полным описанием. Сложность - отслеживание изменения объектов,
+		но в то же время не будет рушится разметка из-за изменения набора
+		свойств объекта.
+		Для отслеживания изменения объектов, введено свойство "revision".
+		!! не до конца продуманный механизм редактирования объеков из разметки,
+			т.к. они не имеют связи с библиотекой.
+
+		Добавлено позже: Нужно хранить не только объекты, но и описание
+			пользовательских типов, в них используемых. -->
+	<!--
+	<embedded_objects>
+		<object id="0" group_id="0" revision="1">
+			<name>Object Name 1</name>
+			<comment></comment>
+			<visible>True</visible>
+			<attributes>
+				<attribute type="point" name="Coordinates" />
+				<attribute type="bool" name="Presence" />
+				<attribute type="integer" name="Length" />
+				<attribute type="0" name="Banknote Side" />
+			</attributes>
+		</object>
+	</embedded_objects>
+	-->
+</marking>

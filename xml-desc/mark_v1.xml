@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Разметка -->
+<marking> <!-- Нужен более понятный тег -->
+	<settings>
+		<!-- Базовый путь к ресурсным айлам проекта:
+			файл библиотеки и источник кадров -->
+		<base_path>/some/path/</base_path>
+
+		<!-- Пути к ресурсным файлам.
+			Если начинается с / или буквы диска (C:), то путь считается абсолютным.
+				В противном случае, он добавляется к base_path
+			Если путь к видео-файлу кончается /, то источником кадров являются все
+				изображения в этом каталоге -->
+		<frame_storage>/absolute/path/to/file.avi</frame_storage>
+		<library>relative/path/to/lib.xml</library>
+
+		<!-- Указывает некоторое число n. Для разметки будет предоставлен только
+			каждый n-й кадр -->
+		<frame_speed>1</frame_speed>
+
+		<fps>25</fps> <!-- скорость обработки распознавателем -->
+		<!-- Еще установки проекта -->
+	</settings>
+
+	<frames>
+		<!-- Размеченный пустой кадр -->
+		<frame number="1" completed="true"></frame>
+
+		<!-- Показывать незаконченные -->
+		<!-- Размеченный кадр с объектами -->
+		<frame number="2" completed="true">
+			<grouping>
+				<group>0</group>
+			</grouping>
+			<object id="0">
+				<rect name="rectangle">
+					<topleft>
+						<x>14</x>
+						<y>67</y>
+					</topleft>
+					<width>230</width>
+					<height>170</height>
+				</rect>
+				<user_enum type="0" name="Side">Front Side</user_enum>
+			</object>
+		</frame>
+		<frame number="3" completed="true">
+			<grouping>
+				<group>0</group>
+			</grouping>
+		</frame>
+
+	</frames>
+
+	<groups>
+		<group id="0" each_frame="false" completed="false">
+			<object id="8">
+				<bool name="walk_thru_line">true</bool>
+			</object>
+		</group>
+	</groups>
+
+</marking>

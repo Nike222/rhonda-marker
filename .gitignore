@@ -1,0 +1,40 @@
+# Qt user settings
+*.pro.user*
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+## OSx trash
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+## Windows trash
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+## Linux trash
+.*
+!.gitignore
+*~
+
+# KDE
+.directory

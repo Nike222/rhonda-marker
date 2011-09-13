@@ -19,22 +19,28 @@
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="user_enum" />
-			<xsd:enumeration value="point" />
 			<xsd:enumeration value="bool" />
 			<xsd:enumeration value="int" />
-			<xsd:enumeration value="oval" />
-			<xsd:enumeration value="rect" />
+			<xsd:enumeration value="string" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
-	<xsd:simpleType name="UserAttrTypes">
+	<xsd:simpleType name="AttrVisualStyles">
 		<xsd:annotation>
 			<xsd:documentation xml:lang="ru">
-				Допустимые строковые значения для определяемых пользователем типов
+				Геометрические формы объектов
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="enum" />
+			<xsd:enumeration value="non-visual" />
+			<xsd:enumeration value="rect" />
+			<xsd:enumeration value="ellipse" />
+			<xsd:enumeration value="dot" />
+		<!-- does it necessary to include circle and square? -->
+		<!--
+			<xsd:enumeration value="circle" />
+			<xsd:enumeration value="square" />
+		-->
 		</xsd:restriction>
 	</xsd:simpleType>
 
@@ -45,6 +51,7 @@
 					<xsd:sequence>
 						<xsd:element name="name" type="xsd:string" />
 						<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+						
 						<xsd:element name="attributes">
 							<xsd:complexType>
 								<xsd:sequence>
@@ -61,10 +68,12 @@
 								</xsd:sequence>
 							</xsd:complexType>
 						</xsd:element>
+
 					</xsd:sequence>
 					<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
-					<xsd:attribute name="group" type="xsd:unsignedInt" use="optional" default="0" />
-					<xsd:attribute name="is_visual" type="xsd:boolean" use="optional" default="false" />
+					<xsd:attribute name="group" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="visible" type="AttrVisualStyles" use="required" />
+					<xsd:attribute name="parent" type="xsd:unsignedInt" use="optional" default="0" />
 				</xsd:complexType>
 			</xsd:element>
 		</xsd:sequence>
@@ -101,7 +110,6 @@
 					</xsd:sequence>
 					<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
 					<xsd:attribute name="alias" type="xsd:string" use="required" />
-					<xsd:attribute name="type" type="UserAttrTypes" use="required" />
 				</xsd:complexType>
 			</xsd:element>
 		</xsd:sequence>

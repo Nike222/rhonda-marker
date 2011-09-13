@@ -1,34 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Библиотека: -->
+<!-- Library -->
 <object_library>
+
 	<objects>
 
-		<object id="0" group="0" is_visual="true">
+		<object id="0" group="0" parent="0" visible="rect">
+		<!-- if "parent" is present and >0, then "group" just ignored -->
+		<!-- Object types: rectangle, ellipse, dot, non-visual -->
 			<name>Object Name 1</name>
 			<comment>Some comment</comment>
 			<attributes>
-				<!-- Встроенные типы:
-					- point
-						точка. задается координатами x, y.
-					- int
-						целочисленный. некоторый размер в точках.
-					- bool
-						булевый. например, произошло событие или нет.
-					- oval
-						овал (точка, 2 радиуса)
-					- rect
-						прямоугольник (точка, ширина, высота)
-					- пользовательское перечисление, "Сторона":
-						"Передняя", "Задняя"
-				-->
-
-				<attribute type="rect">Rectangle</attribute>
-				<attribute type="point">Coordinates</attribute>
-
 				<attribute type="bool">Presence</attribute>
 				<attribute type="int">Length</attribute>
+				<attribute type="string">Title</attribute>
 
-				<!-- Пользовательский тип -->
+				<!-- Custom type (enumeration) -->
 				<attribute type="user_enum" user_type_id="0">Banknote Side</attribute>
 			</attributes>
 		</object>
@@ -36,15 +22,15 @@
 	</objects>
 
 	<groups>
-		<!-- id "0" - корневая группа -->
+		<!-- id "0" - root -->
 		<group id="1" parent_id="0">1-st lever group</group>
 		<group id="2" parent_id="1">2-nd level group</group>
 		<group id="3" parent_id="0">another 1-st lever group</group>
 	</groups>
 
-	<!-- Описание пользовательских типов -->
+	<!-- Custom types description -->
 	<user_types>
-		<user_type id="0" alias="Sides" type="enum">
+		<user_type id="0" alias="Sides">
 			<element>Front Side</element>
 			<element>Back Side</element>
 		</user_type>

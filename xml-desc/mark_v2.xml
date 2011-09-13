@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Разметка -->
-<marking> <!-- Нужен более понятный тег -->
+<marking>
+
 	<settings>
 		<!-- Базовый путь к ресурсным айлам проекта:
 			файл библиотеки и источник кадров -->
@@ -30,21 +31,18 @@
 		<!-- Размеченный кадр с объектами -->
 		<frame number="2" completed="true">
 			<object id="0">
-				<rect name="rectangle">
-					<topleft>
-						<x>14</x>
-						<y>67</y>
-					</topleft>
-					<width>230</width>
-					<height>170</height>
-				</rect>
-				<user_enum type="0" name="Side">Front Side</user_enum>
+				<geometry style="rect">
+					<position left="190" top="300" />
+					<size width="490" height="120" />
+				</geometry>
+				<enum type="0" name="Side">Front Side</enum>
 			</object>
 			<object id="8" object_group="1">
 				<bool name="walk_thru_line">true</bool>
 			</object>
 		</frame>
-		<frame number="3" completed="true">
+		
+		<frame number="3" completed="false">
 			<object id="8" object_group="1">
 				<bool name="walk_thru_line">true</bool>
 			</object>

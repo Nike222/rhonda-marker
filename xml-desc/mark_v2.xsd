@@ -48,24 +48,34 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
+	<xsd:simpleType name="RotationAngle">
+		<xsd:restriction base="xsd:float">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="360" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="VisualGeometry">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="position">
-					<xsd:complexType>
-						<xsd:attribute name="left" type="xsd:integer" use="required" />
-						<xsd:attribute name="top" type="xsd:integer" use="required" />
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="size">
-					<xsd:complexType>
-						<xsd:attribute name="width" type="xsd:unsignedInt" use="required" />
-						<xsd:attribute name="height" type="xsd:unsignedInt" use="required" />
-					</xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
-			<xsd:attribute name="style" type="xsd:string" use="required" />
-		</xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="position">
+				<xsd:complexType>
+					<xsd:attribute name="left" type="xsd:integer" use="required" />
+					<xsd:attribute name="top" type="xsd:integer" use="required" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="size">
+				<xsd:complexType>
+					<xsd:attribute name="width" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="height" type="xsd:unsignedInt" use="required" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="rotation">
+				<xsd:complexType>
+					<xsd:attribute name="yangle" type="RotationAngle" use="optional" default="0" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="style" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="String">

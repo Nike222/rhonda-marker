@@ -34,6 +34,7 @@
 				<geometry style="rect">
 					<position left="190" top="300" />
 					<size width="490" height="120" />
+					<rotation yangle="50" />
 				</geometry>
 				<enum type="0" name="Side">Front Side</enum>
 			</object>

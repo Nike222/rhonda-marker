@@ -30,7 +30,7 @@
 						<xsd:element name="object" minOccurs="0" maxOccurs="unbounded">
 							<xsd:complexType>
 								<xsd:sequence>
-									<xsd:element name="geometry" type="VisualGeometry" minOccurs="0" maxOccurs="unbounded" />
+									<xsd:element name="geometry" type="VisualGeometry" minOccurs="0" maxOccurs="1" />
 									<xsd:element name="bool" type="Bool" minOccurs="0" maxOccurs="unbounded" />
 									<xsd:element name="int" type="Int" minOccurs="0" maxOccurs="unbounded" />
 									<xsd:element name="string" type="String" minOccurs="0" maxOccurs="unbounded" />

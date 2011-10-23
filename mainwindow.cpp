@@ -14,46 +14,46 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//êíîïêà îáçîðà ê ñëîâàðþ
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ð¾Ð±Ð·Ð¾Ñ€Ð° Ðº ÑÐ»Ð¾Ð²Ð°Ñ€ÑŽ
 void MainWindow::on_toolButton_clicked()
 {
 
-    QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Âûáåðèòå ñëîâàðü"),
+    QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ»Ð¾Ð²Ð°Ñ€ÑŒ"),
                                                    QDir::currentPath(),
-                                                    QString::fromLocal8Bit("Äîêóìåíò XML (*.xml)"));
+                                                    QString::fromLocal8Bit("Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚ XML (*.xml)"));
 
     if (!filename.isEmpty()) ui->lineEdit->setText(filename);
 
 
 }
 
-//êíîïêà îáçîðà ê ïðîåêòó
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ð¾Ð±Ð·Ð¾Ñ€Ð° Ðº Ð¿Ñ€Ð¾ÐµÐºÑ‚Ñƒ
 void MainWindow::on_toolButton_2_clicked()
 {
 
-     QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Âûáåðèòå ïðîåêò"),
+     QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾ÐµÐºÑ‚"),
                                                     QDir::currentPath(),
-                                                     QString::fromLocal8Bit("Äîêóìåíò XML (*.xml)"));
+                                                     QString::fromLocal8Bit("Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚ XML (*.xml)"));
 if (!filename.isEmpty()) ui->lineEdit_2->setText(filename);
 }
-//êíîïêà ê èñòî÷íèêó
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ðº Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÑƒ
 void MainWindow::on_toolButton_3_clicked()
 {
 
      int a=0;
-     //QMessageBox::question(0,QString::fromLocal8Bit("Èíôîðìàöèÿ"),QString::fromLocal8Bit("Òîëüêî ðóññêèå ñèìâîëû. Ìû â Ðîññèè"));
-   a=QMessageBox::question(this,QString::fromLocal8Bit("Âûáîð èñòî÷íèêà"),QString::fromLocal8Bit("Îòêðûâàåì êàðòèíêó ?"),QMessageBox::Ok,4);
+     //QMessageBox::question(0,QString::fromLocal8Bit("Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ"),QString::fromLocal8Bit("Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ€ÑƒÑÑÐºÐ¸Ðµ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹. ÐœÑ‹ Ð² Ð Ð¾ÑÑÐ¸Ð¸"));
+   a=QMessageBox::question(this,QString::fromLocal8Bit("Ð’Ñ‹Ð±Ð¾Ñ€ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ°"),QString::fromLocal8Bit("ÐžÑ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ ?"),QMessageBox::Ok,4);
 
    if(a==1)
    {
-       QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Âûáåðèòå îáúåêòû"),
+       QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹"),
                                                    QDir::currentPath(),
-                                                    QString::fromLocal8Bit("Èçîáðàæåíèå (*.png *.xpm *.jpg *.jpeg)") );
+                                                    QString::fromLocal8Bit("Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ (*.png *.xpm *.jpg *.jpeg)") );
        if (!filename.isEmpty()) ui->lineEdit_3->setText(filename);
    }
    if(a==4)
    { QString directory = QFileDialog::getExistingDirectory(this,
-                                QString::fromLocal8Bit("Âûáåðèòå ïàïêó"), QDir::currentPath());
+                                QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ð°Ð¿ÐºÑƒ"), QDir::currentPath());
      if (!directory.isEmpty()) ui->lineEdit_3->setText(directory);
    }
 
@@ -63,44 +63,44 @@ void MainWindow::on_toolButton_5_clicked()
 {
     QMenu *menu = new QMenu(tr("Menu"), this);
 
-   menu->addAction(QString::fromLocal8Bit("&Ôàéë"),this,SLOT(on_vibf_clicked()));
-   menu->addAction(QString::fromLocal8Bit("&Ïàïêà"),this,SLOT(on_vibdir_clicked()));
+   menu->addAction(QString::fromLocal8Bit("&Ð¤Ð°Ð¹Ð»"),this,SLOT(on_vibf_clicked()));
+   menu->addAction(QString::fromLocal8Bit("&ÐŸÐ°Ð¿ÐºÐ°"),this,SLOT(on_vibdir_clicked()));
   ui->toolButton_5->setMenu(menu);
  ui->toolButton_5->showMenu();
 }
-//âûáîð èçîáðàæåíèÿ
+//Ð²Ñ‹Ð±Ð¾Ñ€ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ
 void MainWindow::on_vibf_clicked()
 {
-    QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Âûáåðèòå èñòî÷íèê"),
+    QString filename=QFileDialog::getOpenFileName (this, QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº"),
                                                 QDir::currentPath(),
-                                                 QString::fromLocal8Bit("Èçîáðàæåíèå (*.png *.xpm *.jpg *.jpeg)") );
+                                                 QString::fromLocal8Bit("Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ (*.png *.xpm *.jpg *.jpeg)") );
     if (!filename.isEmpty()) ui->lineEdit_3->setText(filename);
  }
-//âûáîð äèðåêòîðèè
+//Ð²Ñ‹Ð±Ð¾Ñ€ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸
 void MainWindow::on_vibdir_clicked()
 {
     QString directory = QFileDialog::getExistingDirectory(this,
-                                    QString::fromLocal8Bit("Âûáåðèòå ïàïêó"), QDir::currentPath());
+                                    QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ð°Ð¿ÐºÑƒ"), QDir::currentPath());
          if (!directory.isEmpty()) ui->lineEdit_3->setText(directory);
  }
-//ïåðåúîä äàëåå èç ïåðâîé íàñòðîéêè
+//Ð¿ÐµÑ€ÐµÑŠÐ¾Ð´ Ð´Ð°Ð»ÐµÐµ Ð¸Ð· Ð¿ÐµÑ€Ð²Ð¾Ð¹ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸
 void MainWindow::on_pushButton_3_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
-//ïåðåõîä íàçàä èç ïåðâîé íàñòðîéêè
+//Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´ Ð½Ð°Ð·Ð°Ð´ Ð¸Ð· Ð¿ÐµÑ€Ð²Ð¾Ð¹ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸
 void MainWindow::on_pushButton_4_clicked()
 {
      ui->stackedWidget->setCurrentIndex(0);
 }
 
-//êíîïêà âûáðàòü ïóøîâñêàÿ ñ ìåíþ
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ð²Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð¿ÑƒÑˆÐ¾Ð²ÑÐºÐ°Ñ Ñ Ð¼ÐµÐ½ÑŽ
 void MainWindow::on_pushButton_5_clicked()
 {
     QMenu *menu = new QMenu(tr("Menu"), this);
 
-   menu->addAction(QString::fromLocal8Bit("&Ôàéë"),this,SLOT(on_vibf_clicked()));
-   menu->addAction(QString::fromLocal8Bit("&Ïàïêà"),this,SLOT(on_vibdir_clicked()));
+   menu->addAction(QString::fromLocal8Bit("&Ð¤Ð°Ð¹Ð»"),this,SLOT(on_vibf_clicked()));
+   menu->addAction(QString::fromLocal8Bit("&ÐŸÐ°Ð¿ÐºÐ°"),this,SLOT(on_vibdir_clicked()));
   ui->pushButton_5->setMenu(menu);
   ui->pushButton_5->showMenu();
 }

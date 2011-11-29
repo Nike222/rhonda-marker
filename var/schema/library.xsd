@@ -1,0 +1,107 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="object_library">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="objects" type="ObjectsType" />
+				<xsd:element name="groups" type="GroupsType" minOccurs="0" />
+				<xsd:element name="user_types" type="EnumeratesType" minOccurs="0" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="AttrTypes">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ru">
+				Допустимые строковые значения для встроенных типов
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="user_enum" />
+			<xsd:enumeration value="bool" />
+			<xsd:enumeration value="int" />
+			<xsd:enumeration value="string" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="AttrVisualStyles">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ru">
+				Геометрические формы объектов
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="non-visual" />
+			<xsd:enumeration value="rect" />
+			<xsd:enumeration value="ellipse" />
+			<xsd:enumeration value="dot" />
+		<!-- does it necessary to include circle and square? -->
+		<!--
+			<xsd:enumeration value="circle" />
+			<xsd:enumeration value="square" />
+		-->
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ObjectsType">
+		<xsd:sequence>
+			<xsd:element name="object" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="name" type="xsd:string" />
+						<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+
+						<xsd:element name="attributes">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="attribute" minOccurs="0" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="xsd:string">
+													<xsd:attribute name="type" type="AttrTypes" use="required" />
+													<xsd:attribute name="user_type_id" type="xsd:unsignedInt" use="optional" default="0" />
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+
+					</xsd:sequence>
+					<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="group" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="visible" type="AttrVisualStyles" use="required" />
+					<xsd:attribute name="parent" type="xsd:unsignedInt" use="optional" default="0" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GroupsType">
+		<xsd:sequence>
+			<xsd:element name="group" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="id" use="required" type="xsd:unsignedInt" />
+							<xsd:attribute name="parent_id" type="xsd:unsignedInt" use="optional" default="0" />
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="EnumeratesType">
+		<xsd:sequence>
+			<xsd:element name="user_type" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="element" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+					</xsd:sequence>
+					<xsd:attribute name="id" type="xsd:unsignedInt" use="required" />
+					<xsd:attribute name="alias" type="xsd:string" use="required" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

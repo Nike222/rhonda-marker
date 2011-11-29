@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<object_library>
+    <objects>
+	    <object id="0" group="0" parent="0" visible="rect">
+		    <name>Object Name 1</name>
+		    <comment>Some comment</comment>
+		    <attributes>
+			    <attribute type="bool">Presence</attribute>
+			    <attribute type="int">Length</attribute>
+			    <attribute type="string">Title</attribute>
+			    <attribute type="user_enum" user_type_id="0">Banknote Side</attribute>
+		    </attributes>
+	    </object>
+        <object id="1" group="2" parent="0" visible="dot">
+		    <name>Tochechka</name>
+		    <comment>tochechka commentt</comment>
+		    <attributes>
+			    <attribute type="int">count</attribute>
+		    </attributes>
+	    </object>
+	</objects>
+	<groups>
+		<group id="1" parent_id="0">1-st lever group</group>
+		<group id="2" parent_id="1">2-nd level group</group>
+		<group id="3" parent_id="0">another 1-st lever group</group>
+	</groups>
+	<user_types>
+		<user_type id="0" alias="Sides">
+			<element>Front Side</element>
+			<element>Back Side</element>
+		</user_type>
+	</user_types>
+</object_library>
